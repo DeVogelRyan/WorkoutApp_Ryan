@@ -19,8 +19,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun APIRequest() {
         val request =
-            Request.Builder().url("https://exercisedb.p.rapidapi.com/exercises/bodyPartList").get()
-                .addHeader("X-RapidAPI-Key", "3f3a27b7fdmshcdb5f9069f49b85p14f297jsnc6d74f17cdd4")
+            Request.Builder().url("https://exercisedb.p.rapidapi.com/exercises").get()
+                .addHeader("X-RapidAPI-Key", BuildConfig.API_KEY)
                 .addHeader("X-RapidAPI-Host", "exercisedb.p.rapidapi.com").build()
 
         client.newCall(request).enqueue(object : Callback {
