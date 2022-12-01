@@ -14,10 +14,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        APIRequest()
+        
+
+        //APIRequest()
     }
 
-    private fun APIRequest() {
+   /* private fun APIRequest() {
         val request =
             Request.Builder().url("https://exercisedb.p.rapidapi.com/exercises").get()
                 .addHeader("X-RapidAPI-Key", BuildConfig.API_KEY)
@@ -40,5 +42,5 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-    }
+    }*/
 }
