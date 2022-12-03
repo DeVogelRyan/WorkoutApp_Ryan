@@ -1,22 +1,15 @@
 package com.example.workoutapp_ryan.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.model.GlideUrl
-import com.bumptech.glide.load.model.LazyHeaders
-import com.example.workoutapp_ryan.BuildConfig
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.workoutapp_ryan.CustomAdapter
+import com.example.workoutapp_ryan.ItemsViewModel
 import com.example.workoutapp_ryan.R
-import org.json.JSONArray
-
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,13 +27,17 @@ class FirstFragment : Fragment() {
     private var param2: String? = null
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+
         }
+
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +50,30 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // getting the recyclerview by its id
+        val recyclerview = view.findViewById<RecyclerView>(R.id.mRecyclerview)
+
+        // this creates a vertical layout Manager
+        recyclerview.layoutManager = LinearLayoutManager(this.context)
+
+        // ArrayList of class ItemsViewModel
+        val data = ArrayList<ItemsViewModel>()
+
+        // This loop will create 20 Views containing
+        // the image with the count of view
+        for (i in 1..20) {
+            data.add(ItemsViewModel(R.drawable.ic_home, "Item " + i))
+        }
+
+        // This will pass the ArrayList to our Adapter
+        val adapter = CustomAdapter(data)
+
+        // Setting the Adapter with the recyclerview
+        recyclerview.adapter = adapter
+    }
+
+
+    /*fun loadImage(){
         val url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/back"
 
         val queue = Volley.newRequestQueue(this.context)
@@ -61,7 +82,7 @@ class FirstFragment : Fragment() {
             Response.Listener { response ->
                 val jsonArray = JSONArray(response)
                 Log.d("JSON", jsonArray.getJSONObject(0).getString("gifUrl"))
-                val imageview: ImageView = view.findViewById(R.id.imageView3)
+                //val imageview: ImageView = view.findViewById(R.id.imageView3)
                 Glide.with(this).load(jsonArray.getJSONObject(0).getString("gifUrl").replace("http", "https")).error(com.google.android.material.R.drawable.ic_clock_black_24dp).into(imageview)
             },
             Response.ErrorListener {
@@ -77,7 +98,7 @@ class FirstFragment : Fragment() {
         }
 
         queue.add(stringRequest)
-    }
+    }*/
 
     companion object {
         /**
