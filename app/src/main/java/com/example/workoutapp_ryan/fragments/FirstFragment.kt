@@ -1,19 +1,15 @@
 package com.example.workoutapp_ryan.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
-import com.example.workoutapp_ryan.BuildConfig
 import com.example.workoutapp_ryan.R
-import org.json.JSONArray
+import com.example.workoutapp_ryan.adapter.ExerciseAdapter
+import com.example.workoutapp_ryan.model.Exercise
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

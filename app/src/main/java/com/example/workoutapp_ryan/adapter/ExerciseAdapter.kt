@@ -1,15 +1,24 @@
-package com.example.workoutapp_ryan.fragments
+package com.example.workoutapp_ryan.adapter
 
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Response
+import com.android.volley.toolbox.RequestFuture
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestBuilder
+import com.bumptech.glide.request.RequestOptions
 import com.example.workoutapp_ryan.R
-import org.w3c.dom.Text
+import com.example.workoutapp_ryan.model.Exercise
+import org.json.JSONArray
+import org.json.JSONObject
 
 class ExerciseAdapter(private val context: Context, private val exercises: List<Exercise>)
     : RecyclerView.Adapter<ExerciseAdapter.ViewHolder>() {
@@ -34,8 +43,13 @@ class ExerciseAdapter(private val context: Context, private val exercises: List<
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(exercise: Exercise) {
-                itemView.findViewById<TextView>(R.id.tvName).text = exercise.name
-            Glide.with(context).load(exercise.imageUrl).into(itemView.findViewById(R.id.tvImage))
+            itemView.findViewById<TextView>(R.id.tvName).text = exercise.name
+
+
+            val url = "https://wger.de/api/v2/exerciseimage/?format=json&limit=20&offset=20"
+
+            Glide.with(context).load(exercise.imageUrl).apply( RequestOptions().override(800, 200)).into(itemView.findViewById(R.id.tvImage))
+
         }
 
     }
