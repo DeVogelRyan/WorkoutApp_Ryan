@@ -1,15 +1,23 @@
 package com.example.workoutapp_ryan.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import com.bumptech.glide.Glide
 import com.example.workoutapp_ryan.R
 import com.example.workoutapp_ryan.adapter.ExerciseAdapter
 import com.example.workoutapp_ryan.model.Exercise
+import org.json.JSONArray
+import org.json.JSONObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,16 +57,30 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val RecycleView = view.findViewById<RecyclerView>(R.id.mRecyclerview)
-        RecycleView.adapter = ExerciseAdapter(this.requireContext(), createContacts())
+        RecycleView.adapter = ExerciseAdapter(this.requireContext(), createExercises())
         RecycleView.layoutManager = LinearLayoutManager(this.context)
+
     }
 
-    private fun createContacts(): List<Exercise> {
-        val contacts = mutableListOf<Exercise>()
-        for (i in 1..150) contacts.add(Exercise("Person #$i", i))
-        return contacts
+    private fun createExercises(): List<Exercise> {
+        val exercises = mutableListOf<Exercise>()
+        val url = "https://wger.de/api/v2/exerciseimage/?format=json"
+        val queue = Volley.newRequestQueue(this.context)
+        val stringRequest = object : StringRequest(url,
+            Response.Listener { response ->
+                val jsonArray = JSONObject(response).getJSONArray("results")
+                Log.d("JSON", jsonArray.getJSONObject(0).getString("image"))
+                for (i in 9..17) {
+                    exercises.add(Exercise("Person #$i", jsonArray.getJSONObject(i).getString("image")))
+                    Log.d("JSON", jsonArray.getJSONObject(i).getString("image"))
+                }
+            },
+            Response.ErrorListener {
+            })
+        {}
+        queue.add(stringRequest)
+        return exercises
     }
-
 
 
     companion object {

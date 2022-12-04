@@ -44,12 +44,7 @@ class ExerciseAdapter(private val context: Context, private val exercises: List<
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(exercise: Exercise) {
             itemView.findViewById<TextView>(R.id.tvName).text = exercise.name
-
-
-            val url = "https://wger.de/api/v2/exerciseimage/?format=json&limit=20&offset=20"
-
-            Glide.with(context).load(exercise.imageUrl).apply( RequestOptions().override(800, 200)).into(itemView.findViewById(R.id.tvImage))
-
+            Glide.with(context).load(exercise.imgUrl).apply( RequestOptions().override(1200, 400)).into(itemView.findViewById(R.id.tvImage))
         }
 
     }
