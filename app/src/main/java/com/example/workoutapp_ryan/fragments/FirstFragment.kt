@@ -64,13 +64,13 @@ class FirstFragment : Fragment() {
 
     private fun createExercises(): List<Exercise> {
         val exercises = mutableListOf<Exercise>()
-        val url = "https://wger.de/api/v2/exerciseimage/?format=json"
+        val url = "https://wger.de/api/v2/exerciseimage/?format=json&limit=30&offset=30"
         val queue = Volley.newRequestQueue(this.context)
         val stringRequest = object : StringRequest(url,
             Response.Listener { response ->
                 val jsonArray = JSONObject(response).getJSONArray("results")
                 Log.d("JSON", jsonArray.getJSONObject(0).getString("image"))
-                for (i in 9..17) {
+                for (i in 0..29) {
                     exercises.add(Exercise("Person #$i", jsonArray.getJSONObject(i).getString("image")))
                     Log.d("JSON", jsonArray.getJSONObject(i).getString("image"))
                 }
