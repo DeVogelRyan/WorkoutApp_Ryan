@@ -59,7 +59,6 @@ class FirstFragment : Fragment() {
         val RecycleView = view.findViewById<RecyclerView>(R.id.mRecyclerview)
         RecycleView.adapter = ExerciseAdapter(this.requireContext(), createExercises())
         RecycleView.layoutManager = LinearLayoutManager(this.context)
-
     }
 
     private fun createExercises(): List<Exercise> {
