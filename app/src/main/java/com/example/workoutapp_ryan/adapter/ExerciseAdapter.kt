@@ -12,6 +12,16 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.workoutapp_ryan.R
 import com.example.workoutapp_ryan.model.Exercise
 
+
+/* Sources:
+    * https://developer.android.com/develop/ui/views/layout/recyclerview
+    * https://www.youtube.com/watch?v=FiqiIJNALFs&t=640s
+    * https://www.youtube.com/watch?v=GPP4hOTthRg
+    * https://www.youtube.com/watch?v=4o6QwVe_2Yg
+    * https://www.youtube.com/watch?v=rBQi_7L-Uc8
+    * https://medium.com/huawei-developers/android-retrofit-recyclerview-searchview-usage-9e0be6e7ab08
+*/
+
 class ExerciseAdapter(private val context: Context, private val exercises: List<Exercise>)
     : RecyclerView.Adapter<ExerciseAdapter.ViewHolder>() {
 

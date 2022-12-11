@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionInflater
-import com.example.workoutapp_ryan.APIInterface
-import com.example.workoutapp_ryan.MyDataItem
+import com.example.workoutapp_ryan.mydata.APIInterface
+import com.example.workoutapp_ryan.mydata.MyDataItem
 import com.example.workoutapp_ryan.R
 import com.example.workoutapp_ryan.adapter.ExerciseAdapter
 import com.example.workoutapp_ryan.model.Exercise
@@ -62,14 +62,24 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        /* Sources:
+         * https://developer.android.com/develop/ui/views/layout/recyclerview
+         * https://www.youtube.com/watch?v=FiqiIJNALFs&t=640s
+         * https://www.youtube.com/watch?v=GPP4hOTthRg
+         * https://www.youtube.com/watch?v=4o6QwVe_2Yg
+         * https://www.youtube.com/watch?v=rBQi_7L-Uc8
+         * https://medium.com/huawei-developers/android-retrofit-recyclerview-searchview-usage-9e0be6e7ab08
+         */
        val myRecycleView : RecyclerView = view.findViewById<RecyclerView>(R.id.mRecyclerview)
-
         myRecycleView.adapter = ExerciseAdapter(this.requireContext(), createExercises())
         myRecycleView.layoutManager = LinearLayoutManager(this.context)
     }
 
     private fun createExercises(): List<Exercise> {
+        /* Sources:
+         * https://www.youtube.com/watch?v=5gFrXGbQsc8&t=342s
+         * https://square.github.io/retrofit/
+         */
         val retrofitbuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl("https://exercisedb.p.rapidapi.com/")
@@ -86,7 +96,7 @@ class FirstFragment : Fragment() {
                 val responseBody = response.body()!!
                 for(i in 0..20){
                     Log.d("JSON", responseBody.get(i).name)
-                    val name = responseBody.get(i).name
+                    val name = responseBody.get(i).name + "#$i"
                     val gifUrl = responseBody.get(i).gifUrl.replace("http", "https")
                     exercises.add(Exercise(name, gifUrl))
                 }

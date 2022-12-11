@@ -20,6 +20,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        /* Source:
+         * https://www.youtube.com/watch?v=Chso6xrJ6aU
+         */
         val navController = findNavController(R.id.navHostFragment)
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val appBarConfig = AppBarConfiguration(setOf(R.id.firstFragment, R.id.secondFragment, R.id.thirdFragment))
