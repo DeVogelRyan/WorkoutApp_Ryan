@@ -25,6 +25,9 @@
 * Support of landscape/portrait mode (i.e. different layout files) for at least 1 activity
 * Correct application of navigation design patterns within Android
 
+#### Extras:
+* Use of transitions
+
 ### ToDO:
 * Support for at least English and another language of your choice. Additional languages may be provided but do not count for extra points.
 * Use of JUnit framework for writing tests for your application (minimum 1)
