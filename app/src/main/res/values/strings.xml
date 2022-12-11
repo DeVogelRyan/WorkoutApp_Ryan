@@ -2,19 +2,4 @@
     <string name="app_name">WorkoutApp_ryan</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <string-array name="Exercise_text">
-        <item>Arms</item>
-        <item>Back</item>
-        <item>Legs</item>
-        <item>xd</item>
-        <item>Arms</item>
-        <item>Back</item>
-        <item>Legs</item>
-        <item>xd</item>
-        <item>Arms</item>
-        <item>Back</item>
-        <item>Legs</item>
-        <item>xd</item>
-    </string-array>
 </resources>
