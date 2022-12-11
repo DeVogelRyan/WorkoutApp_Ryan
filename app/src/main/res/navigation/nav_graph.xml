@@ -14,13 +14,7 @@
         android:id="@+id/secondFragment"
         android:name="com.example.workoutapp_ryan.fragments.SecondFragment"
         android:label="fragment_second"
-        tools:layout="@layout/fragment_second" >
-        <action
-            android:id="@+id/action_secondFragment_to_firstFragment"
-            app:destination="@id/firstFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
-    </fragment>
+        tools:layout="@layout/fragment_second" />
     <fragment
         android:id="@+id/thirdFragment"
         android:name="com.example.workoutapp_ryan.fragments.ThirdFragment"

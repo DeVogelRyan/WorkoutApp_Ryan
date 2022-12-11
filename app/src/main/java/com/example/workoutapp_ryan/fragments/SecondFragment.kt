@@ -31,7 +31,8 @@ class SecondFragment : Fragment() {
         }
 
         val inflater = TransitionInflater.from(requireContext())
-        exitTransition = inflater.inflateTransition(R.transition.from_left)
+        enterTransition = inflater.inflateTransition(R.transition.to_left)
+        exitTransition = inflater.inflateTransition(R.transition.to_right)
 
     }
 

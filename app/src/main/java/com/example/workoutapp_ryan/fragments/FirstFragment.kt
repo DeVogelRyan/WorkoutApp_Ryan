@@ -5,19 +5,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
-import com.bumptech.glide.Glide
+import androidx.transition.TransitionInflater
+import com.example.workoutapp_ryan.APIInterface
+import com.example.workoutapp_ryan.MyDataItem
 import com.example.workoutapp_ryan.R
 import com.example.workoutapp_ryan.adapter.ExerciseAdapter
 import com.example.workoutapp_ryan.model.Exercise
-import org.json.JSONArray
-import org.json.JSONObject
+import retrofit2.*
+import retrofit2.converter.gson.GsonConverterFactory
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,15 +33,18 @@ class FirstFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private var exercises: MutableList<Exercise> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
-
         }
 
+        val inflater = TransitionInflater.from(requireContext())
+        enterTransition = inflater.inflateTransition(R.transition.to_left)
+        exitTransition = inflater.inflateTransition(R.transition.to_left)
     }
 
 
@@ -54,51 +56,70 @@ class FirstFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_first, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val RecycleView = view.findViewById<RecyclerView>(R.id.mRecyclerview)
-        RecycleView.adapter = ExerciseAdapter(this.requireContext(), createExercises())
-        RecycleView.layoutManager = LinearLayoutManager(this.context)
-    }
 
-    private fun createExercises(): List<Exercise> {
-        val exercises = mutableListOf<Exercise>()
-        val url = "https://wger.de/api/v2/exerciseimage/?format=json&limit=30&offset=30"
-        val queue = Volley.newRequestQueue(this.context)
-        val stringRequest = object : StringRequest(url,
-            Response.Listener { response ->
-                val jsonArray = JSONObject(response).getJSONArray("results")
-                Log.d("JSON", jsonArray.getJSONObject(0).getString("image"))
-                for (i in 0..29) {
-                    exercises.add(Exercise("Person #$i", jsonArray.getJSONObject(i).getString("image")))
-                    Log.d("JSON", jsonArray.getJSONObject(i).getString("image"))
-                }
-            },
-            Response.ErrorListener {
-            })
-        {}
-        queue.add(stringRequest)
-        return exercises
+
+        val myRecycleView : RecyclerView = requireView().findViewById<RecyclerView>(R.id.mRecyclerview)
+
+        myRecycleView.adapter = ExerciseAdapter(this.requireContext(), createExercises())
+        myRecycleView.layoutManager = LinearLayoutManager(this.context)
+
     }
 
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FirstFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FirstFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+     fun createExercises(): List<Exercise> {
+        val retrofitbuilder = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("https://exercisedb.p.rapidapi.com/")
+            .build()
+            .create<APIInterface>(APIInterface::class.java)
+
+        val retrofitData = retrofitbuilder.getData()
+
+        retrofitData.enqueue(object : Callback<List<MyDataItem>?>{
+            override fun onResponse(
+                call: Call<List<MyDataItem>?>,
+                response: Response<List<MyDataItem>?>
+            ) {
+                val responseBody = response.body()!!
+
+                for(i in 0..20){
+                    Log.d("JSON", responseBody.get(i).name)
+                    val name = responseBody.get(i).name
+                    val gifUrl = responseBody.get(i).gifUrl.replace("http", "https")
+                    exercises.add(Exercise(name, gifUrl))
                 }
             }
+
+            override fun onFailure(call: Call<List<MyDataItem>?>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+        return exercises
+
     }
+
+
+
+companion object {
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment FirstFragment.
+     */
+    // TODO: Rename and change types and number of parameters
+    @JvmStatic
+    fun newInstance(param1: String, param2: String) =
+        FirstFragment().apply {
+            arguments = Bundle().apply {
+                putString(ARG_PARAM1, param1)
+                putString(ARG_PARAM2, param2)
+            }
+        }
+}
 }
