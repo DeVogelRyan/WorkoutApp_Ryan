@@ -9,7 +9,7 @@ Source:
     <item
         android:id="@+id/firstFragment"
         android:icon="@drawable/ic_home"
-        android:title="@string"/>
+        android:title="xd"/>
     <item
         android:id="@+id/secondFragment"
         android:icon="@drawable/ic_sports_handball"

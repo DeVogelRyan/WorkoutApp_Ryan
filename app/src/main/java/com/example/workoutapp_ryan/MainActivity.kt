@@ -5,12 +5,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.core.view.iterator
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.room.Room
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,12 +37,37 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setupWithNavController(navController)
 
         // Source: https://developer.android.com/guide/topics/resources/string-resource
-        var counter = 0
+        /*var counter = 0
         val array: Array<String> = resources.getStringArray(R.array.Nav_items_NL)
         for(items in bottomNavigationView.menu){
             items.title = array.get(counter)
             counter += 1
+        }*/
+
+        val db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "users.db"
+        ).build()
+
+
+        (15..20).forEach{
+            lifecycleScope.launch{
+                db.dao.insertUser(
+                    User(
+                        firstName = "Ryan$it",
+                        lastName = "Vougel$it"
+                    )
+                )
+            }
         }
+
+        lifecycleScope.launch{
+            db.dao.getUsers().forEach(::println)
+        }
+
+
+
+
 
 
     }
