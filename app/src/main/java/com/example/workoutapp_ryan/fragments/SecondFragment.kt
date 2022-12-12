@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Switch
+import android.widget.TextView
 import androidx.transition.TransitionInflater
 import com.example.workoutapp_ryan.R
 
@@ -42,6 +44,17 @@ class SecondFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_second, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val sw1 = view.findViewById<Switch>(R.id.switch1)
+        sw1?.setOnCheckedChangeListener { _, isChecked ->
+            val message = if (isChecked) "Switch1:ON" else "Switch1:OFF"
+            val textView = view.findViewById<TextView>(R.id.textChange)
+            textView.text = message
+        }
     }
 
     companion object {
