@@ -4,4 +4,16 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="Switch_object">SwitchInKotlin</string>
+
+    <string-array name="Nav_items_EN">
+        <item>Home</item>
+        <item>Sport</item>
+        <item>Profile</item>
+    </string-array>
+
+    <string-array name="Nav_items_NL">
+        <item>Huis</item>
+        <item>Sport</item>
+        <item>Profiel</item>
+    </string-array>
 </resources>

@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Switch
 import android.widget.TextView
+import androidx.core.view.iterator
 import androidx.transition.TransitionInflater
 import com.example.workoutapp_ryan.R
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -51,10 +53,25 @@ class SecondFragment : Fragment() {
 
         val sw1 = view.findViewById<Switch>(R.id.switch1)
         sw1?.setOnCheckedChangeListener { _, isChecked ->
-            val message = if (isChecked) "Switch1:ON" else "Switch1:OFF"
+           val message = if (isChecked) "Switch1:ON" else "Switch1:OFF"
             val textView = view.findViewById<TextView>(R.id.textChange)
             textView.text = message
+           /* val array: Array<String>
+            if(isChecked){
+               array =  resources.getStringArray(R.array.Nav_items_NL)
+            }
+            else {
+                array =  resources.getStringArray(R.array.Nav_items_EN)
+            }
+
+            var counter = 0
+            val bottomNavigationView = view.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+            for(items in bottomNavigationView.menu){
+                items.title = array.get(counter)
+                counter += 1
+            }*/
         }
+
     }
 
     companion object {
