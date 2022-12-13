@@ -8,9 +8,13 @@ import android.view.ViewGroup
 import android.widget.Switch
 import android.widget.TextView
 import androidx.core.view.iterator
+import androidx.lifecycle.lifecycleScope
+import androidx.room.Room
 import androidx.transition.TransitionInflater
 import com.example.workoutapp_ryan.R
+import com.example.workoutapp_ryan.database.AppDatabase
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -70,6 +74,18 @@ class SecondFragment : Fragment() {
                 items.title = array.get(counter)
                 counter += 1
             }*/
+
+
+            val db = Room.databaseBuilder(
+                this.requireContext(),
+                AppDatabase::class.java, "users.db"
+            ).build()
+
+            lifecycleScope.launch{
+                val getdata = view.findViewById<TextView>(R.id.getData)
+                getdata.text = db.dao.getUsers().toString()
+            }
+
         }
 
     }

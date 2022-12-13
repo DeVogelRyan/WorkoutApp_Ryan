@@ -1,26 +1,18 @@
 package com.example.workoutapp_ryan
 
-import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.core.view.iterator
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.room.Room
+import com.example.workoutapp_ryan.database.AppDatabase
+import com.example.workoutapp_ryan.database.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,21 +41,14 @@ class MainActivity : AppCompatActivity() {
             AppDatabase::class.java, "users.db"
         ).build()
 
+        /*lifecycleScope.launch{
+            db.dao.deleteAll()
+        }*/
 
-        (15..20).forEach{
-            lifecycleScope.launch{
-                db.dao.insertUser(
-                    User(
-                        firstName = "Ryan$it",
-                        lastName = "Vougel$it"
-                    )
-                )
-            }
-        }
+      /*  lifecycleScope.launch{
+            Log.d("Users", db.dao.getUsers().toString())
+        }*/
 
-        lifecycleScope.launch{
-            db.dao.getUsers().forEach(::println)
-        }
 
 
 

@@ -1,12 +1,21 @@
 package com.example.workoutapp_ryan.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import androidx.lifecycle.lifecycleScope
+import androidx.room.Room
 import androidx.transition.TransitionInflater
 import com.example.workoutapp_ryan.R
+import com.example.workoutapp_ryan.database.AppDatabase
+import com.example.workoutapp_ryan.database.User
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,6 +51,27 @@ class ThirdFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_third, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val btn = view.findViewById<Button>(R.id.addToDB)
+        val firstName = view.findViewById<EditText>(R.id.FirstName)
+        val NameDisplay = view.findViewById<TextView>(R.id.NameDisplay)
+        val db = Room.databaseBuilder(
+            this.requireContext(),
+            AppDatabase::class.java, "users.db"
+        ).build()
+
+        btn.setOnClickListener{
+            lifecycleScope.launch {
+                db.dao.insertUser(User(0,  firstName.text.toString(), "xd"))
+                val size = db.dao.getUsers().size - 1
+                NameDisplay.text = db.dao.getUsers().get(size).firstName
+                Log.d("Users", db.dao.getUsers().toString())
+            }
+        }
     }
 
     companion object {

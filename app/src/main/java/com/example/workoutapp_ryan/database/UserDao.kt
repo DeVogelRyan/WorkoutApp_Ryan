@@ -1,4 +1,4 @@
-package com.example.workoutapp_ryan
+package com.example.workoutapp_ryan.database
 
 import androidx.room.*
 
@@ -10,4 +10,8 @@ interface UserDao {
 
     @Query("SELECT * FROM user")
     suspend fun getUsers(): List<User>
+
+    @Query("DELETE FROM user")
+    suspend fun deleteAll()
+
 }
