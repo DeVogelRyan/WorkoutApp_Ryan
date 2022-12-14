@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Sources:
+* https://www.youtube.com/watch?v=72qURZPIUIA
+-->
+<resources>
+    <string name="app_name">FitnessApp_ryan</string>
+    <string name="home_item">Huis</string>
+    <string name="sport_item">Sport</string>
+    <string name="profile_item">Profiel</string>
+
+    <string name="firstName_input">voornaam</string>
+</resources>

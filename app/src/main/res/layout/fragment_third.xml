@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text=""
+            android:hint="@string/firstName_input"
             app:layout_constraintBottom_toTopOf="@+id/addToDB"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

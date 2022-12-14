@@ -1,19 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+Sources:
+* https://www.youtube.com/watch?v=72qURZPIUIA
+-->
 <resources>
     <string name="app_name">WorkoutApp_ryan</string>
+    <string name="home_item">Home</string>
+    <string name="sport_item">Sport</string>
+    <string name="profile_item">Profile</string>
+
+    <string name="firstName_input">first name</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <string name="Switch_object">SwitchInKotlin</string>
-
-    <string-array name="Nav_items_EN">
-        <item>Home</item>
-        <item>Sport</item>
-        <item>Profile</item>
-    </string-array>
-
-    <string-array name="Nav_items_NL">
-        <item>Huis</item>
-        <item>Sport</item>
-        <item>Profiel</item>
-    </string-array>
 </resources>

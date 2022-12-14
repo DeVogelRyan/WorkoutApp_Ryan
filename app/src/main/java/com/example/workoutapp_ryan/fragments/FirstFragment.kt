@@ -47,12 +47,14 @@ class FirstFragment : Fragment() {
         val inflater = TransitionInflater.from(requireContext())
         enterTransition = inflater.inflateTransition(R.transition.to_left)
         exitTransition = inflater.inflateTransition(R.transition.to_left)
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_first, container, false)
     }
@@ -68,7 +70,7 @@ class FirstFragment : Fragment() {
          * https://www.youtube.com/watch?v=rBQi_7L-Uc8
          * https://medium.com/huawei-developers/android-retrofit-recyclerview-searchview-usage-9e0be6e7ab08
          */
-       val myRecycleView : RecyclerView = view.findViewById<RecyclerView>(R.id.mRecyclerview)
+        val myRecycleView : RecyclerView = requireView().findViewById<RecyclerView>(R.id.mRecyclerview)
         myRecycleView.adapter = ExerciseAdapter(this.requireContext(), createExercises())
         myRecycleView.layoutManager = LinearLayoutManager(this.context)
     }

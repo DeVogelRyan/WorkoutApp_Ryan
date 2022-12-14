@@ -6,6 +6,13 @@ import androidx.room.RenameColumn
 import androidx.room.RoomDatabase
 import androidx.room.migration.AutoMigrationSpec
 
+/*
+ Sources:
+ * https://developer.android.com/jetpack/androidx/releases/room
+ * https://developer.android.com/reference/android/arch/persistence/room/PrimaryKey
+ * https://github.com/philipplackner/AndroidRoomMigration
+ */
+
 @Database(
     entities = [User::class], version = 4,
     autoMigrations = [

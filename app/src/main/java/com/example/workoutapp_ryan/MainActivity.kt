@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
             AppDatabase::class.java, "users.db"
         ).build()
 
+
         /*lifecycleScope.launch{
             db.dao.deleteAll()
         }*/
