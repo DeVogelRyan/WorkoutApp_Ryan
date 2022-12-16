@@ -22,5 +22,18 @@ Source:
         android:id="@+id/thirdFragment"
         android:name="com.example.workoutapp_ryan.fragments.ThirdFragment"
         android:label="fragment_third"
-        tools:layout="@layout/fragment_third" />
+        tools:layout="@layout/fragment_third" >
+        <action
+            android:id="@+id/action_thirdFragment_to_detailUserFragment"
+            app:destination="@id/detailUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailUserFragment"
+        android:name="com.example.workoutapp_ryan.fragments.DetailUserFragment"
+        android:label="fragment_detail_user"
+        tools:layout="@layout/fragment_detail_user" >
+        <argument
+            android:name="data"
+            app:argType="string" />
+    </fragment>
 </navigation>

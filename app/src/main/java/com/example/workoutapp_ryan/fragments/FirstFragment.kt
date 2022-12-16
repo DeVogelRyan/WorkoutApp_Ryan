@@ -34,6 +34,8 @@ class FirstFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var isLoaded = false
+    private var myRecycleView: RecyclerView? = null
 
     private var exercises: MutableList<Exercise> = ArrayList()
 
@@ -70,9 +72,14 @@ class FirstFragment : Fragment() {
          * https://www.youtube.com/watch?v=rBQi_7L-Uc8
          * https://medium.com/huawei-developers/android-retrofit-recyclerview-searchview-usage-9e0be6e7ab08
          */
-        val myRecycleView : RecyclerView = requireView().findViewById<RecyclerView>(R.id.mRecyclerview)
-        myRecycleView.adapter = ExerciseAdapter(this.requireContext(), createExercises())
-        myRecycleView.layoutManager = LinearLayoutManager(this.context)
+
+
+        myRecycleView = requireView().findViewById<RecyclerView>(R.id.mRecyclerview)
+        myRecycleView?.layoutManager = LinearLayoutManager(this.context)
+        // myRecycleView?.adapter = null
+        createExercises()
+        isLoaded = true
+
     }
 
     private fun createExercises(): List<Exercise> {
@@ -88,18 +95,24 @@ class FirstFragment : Fragment() {
 
         val retrofitData = retrofitbuilder.getData()
 
-        retrofitData.enqueue(object : Callback<List<MyDataItem>?>{
+        retrofitData.enqueue(object : Callback<List<MyDataItem>?> {
             override fun onResponse(
                 call: Call<List<MyDataItem>?>,
                 response: Response<List<MyDataItem>?>
             ) {
                 val responseBody = response.body()!!
-                for(i in 0..20){
+                exercises.clear()
+
+                for (i in 0..20) {
                     Log.d("JSON", responseBody.get(i).name)
                     val name = responseBody.get(i).name + "#$i"
                     val gifUrl = responseBody.get(i).gifUrl.replace("http", "https")
                     exercises.add(Exercise(name, gifUrl))
+
+                    // myRecycleView?.adapter?.notifyDataSetChanged()
                 }
+                myRecycleView?.adapter =
+                    this@FirstFragment.context?.let { ExerciseAdapter(it, exercises) }
             }
 
             override fun onFailure(call: Call<List<MyDataItem>?>, t: Throwable) {

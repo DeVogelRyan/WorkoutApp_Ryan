@@ -2,6 +2,7 @@ package com.example.workoutapp_ryan.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -45,6 +46,12 @@ class DetailUserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        val textview = view.findViewById<TextView>(R.id.DetailText)
+        val args = this.arguments
+        val inputData = args?.get("data")
+        Log.d("Data", inputData.toString())
+        textview.text = requireArguments().getString("data").toString()
     }
 
     companion object {

@@ -61,9 +61,17 @@ class ThirdFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val btn = view.findViewById<Button>(R.id.addToDB)
-        val firstName = view.findViewById<EditText>(R.id.FirstName)
         //val NameDisplay = view.findViewById<TextView>(R.id.NameDisplay)
-
+        btn.setOnClickListener{
+            val firstName = view.findViewById<EditText>(R.id.FirstName)
+            val text = firstName.text.toString()
+            val bundle = Bundle()
+            bundle.putString("data", "xddd")
+            val fragment = DetailUserFragment()
+            findNavController().navigate(R.id.action_thirdFragment_to_detailUserFragment, Bundle().apply {
+                putString("data", text)
+            })
+        }
 
     }
 
