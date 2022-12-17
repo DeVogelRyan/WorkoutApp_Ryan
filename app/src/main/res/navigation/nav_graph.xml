@@ -24,16 +24,28 @@ Source:
         android:label="fragment_third"
         tools:layout="@layout/fragment_third" >
         <action
-            android:id="@+id/action_thirdFragment_to_detailUserFragment"
-            app:destination="@id/detailUserFragment" />
+            android:id="@+id/action_thirdFragment_to_userCreate2"
+            app:destination="@id/userCreate2" />
     </fragment>
     <fragment
         android:id="@+id/detailUserFragment"
         android:name="com.example.workoutapp_ryan.fragments.DetailUserFragment"
         android:label="fragment_detail_user"
-        tools:layout="@layout/fragment_detail_user" >
+        tools:layout="@layout/fragment_edit_user_data" >
         <argument
-            android:name="data"
+            android:name="username"
             app:argType="string" />
+        <argument
+            android:name="weight"
+            app:argType="float" />
+    </fragment>
+    <fragment
+        android:id="@+id/userCreate2"
+        android:name="com.example.workoutapp_ryan.fragments.UserCreate"
+        android:label="fragment_user_create"
+        tools:layout="@layout/fragment_create_user" >
+        <action
+            android:id="@+id/action_userCreate2_to_detailUserFragment"
+            app:destination="@id/detailUserFragment" />
     </fragment>
 </navigation>

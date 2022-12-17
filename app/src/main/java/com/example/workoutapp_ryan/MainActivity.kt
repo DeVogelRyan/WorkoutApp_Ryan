@@ -24,8 +24,6 @@ class MainActivity : AppCompatActivity() {
          */
         val navController = findNavController(R.id.navHostFragment)
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-        val appBarConfig = AppBarConfiguration(setOf(R.id.firstFragment, R.id.secondFragment, R.id.thirdFragment))
-        setupActionBarWithNavController(navController, appBarConfig)
         bottomNavigationView.setupWithNavController(navController)
 
         // Source: https://developer.android.com/guide/topics/resources/string-resource
