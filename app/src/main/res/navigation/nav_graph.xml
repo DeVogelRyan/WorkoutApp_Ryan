@@ -33,9 +33,6 @@ Source:
         android:label="fragment_detail_user"
         tools:layout="@layout/fragment_edit_user_data" >
         <argument
-            android:name="username"
-            app:argType="string" />
-        <argument
             android:name="weight"
             app:argType="float" />
     </fragment>

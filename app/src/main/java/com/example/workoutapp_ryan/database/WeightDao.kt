@@ -10,15 +10,15 @@ import androidx.room.*
  */
 
 @Dao
-interface UserDao {
+interface WeightDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertUser(user: User)
+    suspend fun insertWeight(weight: Weight)
 
-    @Query("SELECT * FROM user")
-    suspend fun getUsers(): List<User>
+    @Query("SELECT * FROM weight")
+    suspend fun getWeights(): List<Weight>
 
-    @Query("DELETE FROM user")
+    @Query("DELETE FROM weight")
     suspend fun deleteAll()
 
 }

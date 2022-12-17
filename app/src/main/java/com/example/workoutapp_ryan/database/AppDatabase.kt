@@ -14,16 +14,9 @@ import androidx.room.migration.AutoMigrationSpec
  */
 
 @Database(
-    entities = [User::class], version = 4,
-    autoMigrations = [
-       AutoMigration(from = 3, to = 4)
-    ]
+    entities = [Weight::class], version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
-    abstract val dao: UserDao
-
-
-    @RenameColumn(tableName = "User", fromColumnName = "id", toColumnName = "firstName")
-    class Migration2To3: AutoMigrationSpec
+    abstract val dao: WeightDao
 
 }

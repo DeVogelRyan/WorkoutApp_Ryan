@@ -83,12 +83,12 @@ dependencies {
     testImplementation("org.eclipse.jetty:jetty-server:11.0.12")
     //database
     def room_version = "2.4.2"
-
     implementation "androidx.room:room-runtime:2.4.3"
     implementation "androidx.room:room-ktx:2.4.3"
     kapt "androidx.room:room-compiler:2.4.3"
     androidTestImplementation "androidx.room:room-testing:2.4.3"
-
     androidTestImplementation "com.google.truth:truth:1.1.3"
+    //Graph
+    implementation 'com.jjoe64:graphview:4.2.2'
 
 }

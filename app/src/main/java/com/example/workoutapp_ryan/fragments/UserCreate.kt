@@ -46,11 +46,8 @@ class UserCreate : Fragment() {
 
         val btn = view.findViewById<Button>(R.id.CreateUser)
         btn.setOnClickListener{
-            val username = view.findViewById<EditText>(R.id.username)
-            val text = username.text.toString()
             val weight = view.findViewById<EditText>(R.id.weight)
             findNavController().navigate(R.id.action_userCreate2_to_detailUserFragment, Bundle().apply {
-                putString("username", text)
                 putFloat("weight", weight.text.toString().toFloat())
             })
         }

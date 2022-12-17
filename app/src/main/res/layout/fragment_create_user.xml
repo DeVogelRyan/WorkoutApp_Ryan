@@ -12,19 +12,6 @@
         android:layout_height="match_parent">
 
 
-        <EditText
-            android:id="@+id/username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="272dp"
-            android:ems="10"
-            android:hint="@string/firstName_input"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <Button
             android:id="@+id/CreateUser"
             android:layout_width="wrap_content"
@@ -35,21 +22,23 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.674" />
+            app:layout_constraintVertical_bias="0.598" />
 
         <EditText
             android:id="@+id/weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="92dp"
             android:layout_marginBottom="52dp"
             android:ems="10"
             android:hint="weight"
             android:inputType="numberDecimal"
+            android:minHeight="48dp"
             app:layout_constraintBottom_toTopOf="@+id/CreateUser"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/username" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.961" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

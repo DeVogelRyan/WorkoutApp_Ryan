@@ -1,20 +1,22 @@
 package com.example.workoutapp_ryan.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Switch
-import android.widget.TextView
-import androidx.core.view.iterator
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
 import androidx.transition.TransitionInflater
 import com.example.workoutapp_ryan.R
 import com.example.workoutapp_ryan.database.AppDatabase
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.jjoe64.graphview.GraphView
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter
+import com.jjoe64.graphview.series.DataPoint
+import com.jjoe64.graphview.series.LineGraphSeries
 import kotlinx.coroutines.launch
+import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,6 +32,7 @@ class SecondFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,43 +55,65 @@ class SecondFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_second, container, false)
     }
 
+    /*
+     * Source:
+     * https://www.geeksforgeeks.org/android-line-graph-view-with-kotlin/
+     */
+    lateinit var lineGraphView: GraphView
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sw1 = view.findViewById<Switch>(R.id.switch1)
-        sw1?.setOnCheckedChangeListener { _, isChecked ->
-           val message = if (isChecked) "Switch1:ON" else "Switch1:OFF"
-            val textView = view.findViewById<TextView>(R.id.textChange)
-            textView.text = message
-           /* val array: Array<String>
-            if(isChecked){
-               array =  resources.getStringArray(R.array.Nav_items_NL)
+        lineGraphView = view.findViewById(R.id.idGraphView)
+
+        val db = Room.databaseBuilder(
+            this.requireContext(),
+            AppDatabase::class.java, "users.db"
+        ).build()
+
+
+        var series1: LineGraphSeries<DataPoint> = LineGraphSeries()
+
+        val calendar = Calendar.getInstance()
+        val d1 = calendar.time
+        calendar.add(Calendar.DATE, 1)
+
+        lifecycleScope.launch{
+            Log.d("Users", db.dao.getWeights().toString())
+
+            db.dao.getWeights().forEach{
+                //series1 = LineGraphSeries(arrayOf(DataPoint(it.weightID.toDouble(), it.weight.toDouble())))
+                //Log.d("Users", currentDate.toDouble().toString())
+                series1.appendData(DataPoint(it.weightID.toDouble(), it.weight.toDouble()), true, 500)
             }
-            else {
-                array =  resources.getStringArray(R.array.Nav_items_EN)
-            }
-
-            var counter = 0
-            val bottomNavigationView = view.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-            for(items in bottomNavigationView.menu){
-                items.title = array.get(counter)
-                counter += 1
-            }*/
-
-
-            val db = Room.databaseBuilder(
-                this.requireContext(),
-                AppDatabase::class.java, "users.db"
-            ).build()
-
-            lifecycleScope.launch{
-                val getdata = view.findViewById<TextView>(R.id.getData)
-                getdata.text = db.dao.getUsers().toString()
-            }
-
         }
 
+
+        // on below line adding animation
+        lineGraphView.animate()
+
+        // on below line we are setting scrollable
+        // for point graph view
+        lineGraphView.viewport.isScrollable = true
+
+        // on below line we are setting scalable.
+        lineGraphView.viewport.isScalable = true
+
+        // on below line we are setting scalable y
+        lineGraphView.viewport.setScalableY(true)
+
+        // on below line we are setting scrollable y
+        lineGraphView.viewport.setScrollableY(true)
+
+        // on below line we are setting color for series.
+        series1.color = R.color.purple_200
+
+        // on below line we are adding
+        // data series to our graph view.
+        lineGraphView.addSeries(series1)
+
     }
+
 
     companion object {
         /**

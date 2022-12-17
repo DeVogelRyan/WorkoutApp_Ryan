@@ -6,8 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import androidx.lifecycle.lifecycleScope
+import androidx.room.Room
 import com.example.workoutapp_ryan.R
+import com.example.workoutapp_ryan.database.AppDatabase
+import com.example.workoutapp_ryan.database.Weight
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,14 +51,21 @@ class DetailUserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val username = view.findViewById<TextView>(R.id.editUserName)
         val weight = view.findViewById<TextView>(R.id.editWeight)
         val args = this.arguments
-        val usernameArgs = args?.get("username")
         val weightArgs = args?.get("weight")
-        Log.d("Data", username.toString())
-        username.text = usernameArgs.toString()
         weight.text = weightArgs.toString()
+        val db = Room.databaseBuilder(
+            this.requireContext(),
+            AppDatabase::class.java, "users.db"
+        ).build()
+        val btn = view.findViewById<Button>(R.id.saveToDb)
+        btn.setOnClickListener{
+            lifecycleScope.launch {
+                db.dao.insertWeight(Weight(0, weight.text.toString().toFloat()))
+                Log.d("Users", db.dao.getWeights().toString())
+            }
+        }
     }
 
     companion object {
