@@ -46,17 +46,34 @@ Sources:
 
             <TextView
                 android:id="@+id/tvName"
-                android:layout_width="218dp"
-                android:layout_height="58dp"
-                android:layout_marginStart="150dp"
+                android:layout_width="170dp"
+                android:layout_height="92dp"
+                android:layout_marginStart="152dp"
                 android:text="TextView"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.359"
                 app:layout_constraintStart_toStartOf="@+id/tvImage"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.146" />
+                app:layout_constraintVertical_bias="0.444" />
 
+            <ImageButton
+                android:id="@+id/Like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="288dp"
+                android:background="@null"
+                android:scaleType="centerInside"
+                android:scaleX="1.8"
+                android:scaleY="1.8"
+                android:src="@drawable/ic_star_passive"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.737"
+                app:layout_constraintStart_toStartOf="@+id/tvImage"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.153" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

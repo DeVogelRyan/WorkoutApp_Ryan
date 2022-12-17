@@ -116,7 +116,7 @@ class FirstFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<List<MyDataItem>?>, t: Throwable) {
-                TODO("Not yet implemented")
+
             }
 
         })
