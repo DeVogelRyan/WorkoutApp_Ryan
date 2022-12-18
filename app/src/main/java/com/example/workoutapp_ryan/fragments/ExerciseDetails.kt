@@ -1,13 +1,12 @@
 package com.example.workoutapp_ryan.fragments
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.workoutapp_ryan.R
@@ -49,12 +48,22 @@ class ExerciseDetails : Fragment() {
         val args = this.arguments
         val nameArgs = args?.get("name")
         val imgUrlArgs = args?.get("imgUrl")
-        Log.d("Users", imgUrlArgs.toString())
+        val bodyPartArgs = args?.get("bodyPart")
+        val equipmentArgs = args?.get("equipment")
+        val targetArgs = args?.get("target")
         val nameView = view.findViewById<TextView>(R.id.DetailsExerciseName)
         val imgUrlView = view.findViewById<ImageView>(R.id.DetailsimgUrl)
-        Glide.with(this.requireContext()).load(imgUrlArgs).apply(RequestOptions().override(800, 800))
-            .into(imgUrlView)
+        val bodyPart = view.findViewById<TextView>(R.id.DetailsExerciseBodyPart)
+        val equipment = view.findViewById<TextView>(R.id.DetailsExerciseEquipment)
+        val target = view.findViewById<TextView>(R.id.DetailsExerciseTarget)
         nameView.text = nameArgs.toString()
+        Glide.with(this.requireContext()).load(imgUrlArgs)
+            .apply(RequestOptions().override(800, 800))
+            .into(imgUrlView)
+        bodyPart.text = "bodypart: ${bodyPartArgs.toString()}"
+        equipment.text = "bodypart: ${equipmentArgs.toString()}"
+        target.text = "bodypart: ${targetArgs.toString()}"
+
     }
 
     companion object {

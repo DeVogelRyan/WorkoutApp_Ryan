@@ -5,22 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.TextView
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.Glide.init
 import com.bumptech.glide.request.RequestOptions
 import com.example.workoutapp_ryan.R
-import com.example.workoutapp_ryan.api.model.MyDataItem
-import com.example.workoutapp_ryan.fragments.ExerciseDetails
-import com.example.workoutapp_ryan.fragments.FirstFragment
 import com.example.workoutapp_ryan.recycleview.model.Exercise
-import com.example.workoutapp_ryan.recycleview.model.Weight
-import retrofit2.Callback
 
 /* Sources:
     * https://developer.android.com/develop/ui/views/layout/recyclerview

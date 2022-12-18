@@ -24,17 +24,16 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [SecondFragment.newInstance] factory method to
+ * Use the [GetHistory.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SecondFragment : Fragment() {
+class GetHistory : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
     private var myRecycleView: RecyclerView? = null
     private var weights: MutableList<Weight> = ArrayList()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +45,6 @@ class SecondFragment : Fragment() {
         val inflater = TransitionInflater.from(requireContext())
         enterTransition = inflater.inflateTransition(R.transition.to_left)
         exitTransition = inflater.inflateTransition(R.transition.to_right)
-
     }
 
     override fun onCreateView(
@@ -54,19 +52,17 @@ class SecondFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second, container, false)
+        return inflater.inflate(R.layout.fragment_history, container, false)
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         myRecycleView = requireView().findViewById<RecyclerView>(R.id.RecycleviewWeight)
         myRecycleView?.layoutManager = LinearLayoutManager(this.context)
         // myRecycleView?.adapter = null
         initList()
         Log.d("Users", weights.toString())
-
     }
 
     private fun initList(): List<Weight> {
@@ -82,7 +78,7 @@ class SecondFragment : Fragment() {
                 Log.d("Users", it.weight.toString())
             }
             myRecycleView?.adapter =
-                this@SecondFragment.context?.let { WeightAdapter(it, weights) }
+                this@GetHistory.context?.let { WeightAdapter(it, weights) }
 
         }
         return weights
@@ -101,7 +97,7 @@ class SecondFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            SecondFragment().apply {
+            GetHistory().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

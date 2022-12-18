@@ -2,10 +2,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/userCreate"
+    android:id="@+id/createWeight"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.UserCreate">
+    tools:context=".fragments.CreateWeight">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.598" />
+            app:layout_constraintVertical_bias="0.717" />
 
         <EditText
             android:id="@+id/weight"
@@ -33,6 +33,7 @@
             android:hint="weight"
             android:inputType="numberDecimal"
             android:minHeight="48dp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/CreateUser"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"

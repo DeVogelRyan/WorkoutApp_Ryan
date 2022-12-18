@@ -1,7 +1,5 @@
 package com.example.workoutapp_ryan.recycleview.model
 
-import java.util.Date
-
 /* Sources:
     * https://developer.android.com/develop/ui/views/layout/recyclerview
     * https://www.youtube.com/watch?v=FiqiIJNALFs&t=640s

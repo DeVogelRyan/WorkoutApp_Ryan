@@ -7,15 +7,19 @@ Source:
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/firstFragment"
+        android:id="@+id/exerciseFragment"
         android:icon="@drawable/ic_home"
         android:title="@string/home_item"/>
     <item
-        android:id="@+id/secondFragment"
-        android:icon="@drawable/ic_sports_handball"
-        android:title="@string/sport_item"/>
+        android:id="@+id/getHistory"
+        android:icon="@drawable/ic_history"
+        android:title="@string/history_item"/>
     <item
-        android:id="@+id/thirdFragment"
-        android:icon="@drawable/ic_person"
-        android:title="@string/profile_item"/>
+        android:id="@+id/createWeight"
+        android:icon="@drawable/ic_balance"
+        android:title="@string/weight_item"/>
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_balance"
+        android:title="@string/weight_item"/>
 </menu>

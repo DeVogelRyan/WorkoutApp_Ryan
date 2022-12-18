@@ -2,17 +2,20 @@
 
 <!--
 Sources:
-   * https://www.geeksforgeeks.org/how-to-create-landscape-layout-in-android-studio/
+    * https://developer.android.com/develop/ui/views/layout/recyclerview
+    * https://www.youtube.com/watch?v=FiqiIJNALFs&t=640s
+    * https://www.youtube.com/watch?v=GPP4hOTthRg
+    * https://www.youtube.com/watch?v=4o6QwVe_2Yg
+    * https://www.youtube.com/watch?v=rBQi_7L-Uc8
+    * https://medium.com/huawei-developers/android-retrofit-recyclerview-searchview-usage-9e0be6e7ab08
 -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/firstFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/getHistory"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_200"
-    tools:context=".fragments.FirstFragment"
-    tools:ignore="MissingDefaultResource">
+    tools:context=".fragments.GetHistory">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,17 +23,17 @@ Sources:
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/RecycleviewExercise"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="55dp"
+            android:id="@+id/RecycleviewWeight"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            tools:listitem="@layout/exercise_item">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="55dp"
+            tools:listitem="@layout/weight_item">
 
         </androidx.recyclerview.widget.RecyclerView>
 
