@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,7 @@ import com.example.workoutapp_ryan.database.AppDatabase
 import com.example.workoutapp_ryan.recycleview.adapter.WeightAdapter
 import com.example.workoutapp_ryan.recycleview.model.Weight
 import kotlinx.coroutines.launch
+import org.w3c.dom.Text
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -72,6 +74,8 @@ class GetHistory : Fragment() {
             AppDatabase::class.java, "users.db"
         ).build()
 
+        val historyEmpty = requireView().findViewById<TextView>(R.id.History_Is_empty)
+
         lifecycleScope.launch {
             db.dao.getWeights().forEach {
                 weights.add(Weight(it.createdAt, it.weight))
@@ -79,6 +83,10 @@ class GetHistory : Fragment() {
             }
             myRecycleView?.adapter =
                 this@GetHistory.context?.let { WeightAdapter(it, weights) }
+
+            if(db.dao.getWeights().isEmpty()){
+                historyEmpty.text = getString(R.string.history_empty)
+            }
 
         }
         return weights

@@ -35,17 +35,8 @@ Source:
         android:label="fragment_create_weight"
         tools:layout="@layout/fragment_create_weight" >
         <action
-            android:id="@+id/action_createWeight2_to_detailUserFragment"
-            app:destination="@id/detailUserFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/detailUserFragment"
-        android:name="com.example.workoutapp_ryan.fragments.DetailUserFragment"
-        android:label="fragment_confirm_weight"
-        tools:layout="@layout/fragment_confirm_weight" >
-        <argument
-            android:name="weight"
-            app:argType="float" />
+            android:id="@+id/action_createWeight_to_confirmWeight"
+            app:destination="@id/confirmWeight" />
     </fragment>
     <fragment
         android:id="@+id/exerciseFragment"
@@ -66,4 +57,16 @@ Source:
         android:name="com.example.workoutapp_ryan.fragments.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/confirmWeight"
+        android:name="com.example.workoutapp_ryan.fragments.ConfirmWeight"
+        android:label="fragment_confirm_weight"
+        tools:layout="@layout/fragment_confirm_weight">
+        <argument
+            android:name="weight"
+            app:argType="float" />
+        <action
+            android:id="@+id/action_detailUserFragment_to_getHistory"
+            app:destination="@id/getHistory" />
+    </fragment>
 </navigation>

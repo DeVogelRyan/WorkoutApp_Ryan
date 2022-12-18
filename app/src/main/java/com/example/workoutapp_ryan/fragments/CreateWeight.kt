@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.workoutapp_ryan.R
@@ -43,13 +45,25 @@ class CreateWeight : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val btn = view.findViewById<Button>(R.id.CreateUser)
+        val btn = view.findViewById<Button>(R.id.goNext)
         btn.setOnClickListener{
-            val weight = view.findViewById<EditText>(R.id.weight)
-            findNavController().navigate(R.id.action_createWeight2_to_detailUserFragment, Bundle().apply {
-                putFloat("weight", weight.text.toString().toFloat())
-            })
+            if(!isEmpty()) {
+                val weight = view.findViewById<EditText>(R.id.editWeight)
+                findNavController().navigate(
+                    R.id.action_createWeight_to_confirmWeight,
+                    Bundle().apply {
+                        putFloat("weight", weight.text.toString().toFloat())
+                    })
+            }
+            else {
+                Toast.makeText(context, getString(R.string.error), Toast.LENGTH_SHORT).show()
+            }
         }
+    }
+
+    private fun isEmpty(): Boolean {
+        val weight = requireView().findViewById<TextView>(R.id.editWeight)
+        return weight.text.isEmpty()
     }
 
     companion object {

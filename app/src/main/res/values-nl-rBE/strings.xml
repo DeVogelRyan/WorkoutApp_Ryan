@@ -8,6 +8,21 @@ Sources:
     <string name="home_item">Huis</string>
     <string name="history_item">Geschiedenis</string>
     <string name="weight_item">Gewicht</string>
+    <string name="settings_item">Instellingen</string>
 
-    <string name="firstName_input">voornaam</string>
+    <string name="history_empty">Er is nog geen gewichtsgeschiedenis toegevoegd!</string>
+
+
+    <string name="weightHint">gewicht</string>
+    <string name="nextbutton">Volgende</string>
+
+
+    <string name="confirm_dialog">Weet je zeker dat dit klopt?</string>
+    <string name="succes">Succesvol opgeslagen!</string>
+    <string name="error">Je moet een nummer invullen!</string>
+    <string name="confirmbutton">Bevestig</string>
+
+    <string name="deleteDB">Database succesvol verwijderd!</string>
+
+
 </resources>

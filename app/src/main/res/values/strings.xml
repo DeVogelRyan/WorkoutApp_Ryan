@@ -7,7 +7,23 @@ Sources:
     <string name="home_item">Home</string>
     <string name="history_item">History</string>
     <string name="weight_item">Weight</string>
-    <string name="firstName_input">first name</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="settings_item">Settings</string>
+
+    <string name="history_empty">No weight history is added yet!</string>
+
+
+    <string name="weightHint">weight</string>
+    <string name="nextbutton">Next</string>
+
+
+    <string name="confirm_dialog">Are you sure this is correct?</string>
+    <string name="succes">Successfully saved!</string>
+    <string name="error">You have to fill in a number!</string>
+    <string name="confirmbutton">Confirm</string>
+
+    <string name="deleteDB">Successfully delete database!</string>
+
+
+
+
 </resources>

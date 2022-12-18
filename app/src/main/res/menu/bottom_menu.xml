@@ -20,6 +20,6 @@ Source:
         android:title="@string/weight_item"/>
     <item
         android:id="@+id/settingsFragment"
-        android:icon="@drawable/ic_balance"
-        android:title="@string/weight_item"/>
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings_item"/>
 </menu>

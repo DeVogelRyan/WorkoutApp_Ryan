@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.room.Room
 import com.example.workoutapp_ryan.R
 import com.example.workoutapp_ryan.database.AppDatabase
@@ -23,10 +24,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [DetailUserFragment.newInstance] factory method to
+ * Use the [ConfirmWeight.newInstance] factory method to
  * create an instance of this fragment.
  */
-class DetailUserFragment : Fragment() {
+class ConfirmWeight : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -61,13 +62,24 @@ class DetailUserFragment : Fragment() {
             AppDatabase::class.java, "users.db"
         ).build()
         val btn = view.findViewById<Button>(R.id.saveToDb)
-        btn.setOnClickListener{
-            lifecycleScope.launch {
-                db.dao.insertWeight(Weight(0, weight.text.toString().toFloat()))
-                Log.d("Users", db.dao.getWeights().toString())
-                Toast.makeText(context,"Successfully saved!",Toast.LENGTH_SHORT).show()
+        btn.setOnClickListener {
+            if (!isEmpty()) {
+                lifecycleScope.launch {
+                    db.dao.insertWeight(Weight(0, weight.text.toString().toFloat()))
+                    Log.d("Users", db.dao.getWeights().toString())
+                    Toast.makeText(context, getString(R.string.succes), Toast.LENGTH_SHORT).show()
+                    weight.text = ""
+                }
+            }
+            else {
+                Toast.makeText(context, getString(R.string.error), Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun isEmpty(): Boolean {
+        val weight = requireView().findViewById<TextView>(R.id.editWeight)
+        return weight.text.isEmpty()
     }
 
     companion object {
@@ -82,7 +94,7 @@ class DetailUserFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            DetailUserFragment().apply {
+            ConfirmWeight().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
