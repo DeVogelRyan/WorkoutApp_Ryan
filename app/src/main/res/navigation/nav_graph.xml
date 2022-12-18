@@ -12,7 +12,11 @@ Source:
         android:id="@+id/firstFragment"
         android:name="com.example.workoutapp_ryan.fragments.FirstFragment"
         android:label="fragment_first"
-        tools:layout="@layout/fragment_first" />
+        tools:layout="@layout/fragment_first" >
+        <action
+            android:id="@+id/action_firstFragment_to_exerciseDetails"
+            app:destination="@id/exerciseDetails" />
+    </fragment>
     <fragment
         android:id="@+id/secondFragment"
         android:name="com.example.workoutapp_ryan.fragments.SecondFragment"
@@ -44,5 +48,26 @@ Source:
         <action
             android:id="@+id/action_userCreate2_to_detailUserFragment"
             app:destination="@id/detailUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exerciseDetails"
+        android:name="com.example.workoutapp_ryan.fragments.ExerciseDetails"
+        android:label="fragment_exercise_details"
+        tools:layout="@layout/fragment_exercise_details" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="imgUrl"
+            app:argType="string" />
+        <argument
+            android:name="bodyPart"
+            app:argType="string" />
+        <argument
+            android:name="equipment"
+            app:argType="string" />
+        <argument
+            android:name="target"
+            app:argType="string" />
     </fragment>
 </navigation>

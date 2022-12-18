@@ -8,5 +8,10 @@ package com.example.workoutapp_ryan.recycleview.model
     * https://www.youtube.com/watch?v=rBQi_7L-Uc8
     * https://medium.com/huawei-developers/android-retrofit-recyclerview-searchview-usage-9e0be6e7ab08
 */
-data class Exercise(val name: String, val imgUrl: String) {
-}
+data class Exercise(
+    val name: String,
+    val imgUrl: String,
+    val bodyPart: String,
+    val equipment: String,
+    val target: String
+)

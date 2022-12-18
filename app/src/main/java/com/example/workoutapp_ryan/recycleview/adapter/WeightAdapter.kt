@@ -32,7 +32,8 @@ class WeightAdapter(private val context: Context, private val weights: List<Weig
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Log.i(TAG, "onBindViewHolder at position $position")
         val weight = weights[position]
-        if (position in 1 until itemCount - 1) {
+        //get the second item
+        if (position > 0) {
             if (weights[position - 1].weightNumber > weights[position].weightNumber) {
                 holder.bind(weight, true)
             }

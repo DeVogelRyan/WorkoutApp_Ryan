@@ -5,7 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionInflater
@@ -30,12 +33,12 @@ private const val ARG_PARAM2 = "param2"
  * Use the [FirstFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class FirstFragment : Fragment() {
+class FirstFragment : Fragment(), ExerciseAdapter.OnItemClickListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var myRecycleView: RecyclerView? = null
 
+    private var myRecycleView: RecyclerView? = null
     private var exercises: MutableList<Exercise> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -104,16 +107,20 @@ class FirstFragment : Fragment() {
                     Log.d("JSON", responseBody.get(i).name)
                     val name = responseBody.get(i).name + "#$i"
                     val gifUrl = responseBody.get(i).gifUrl.replace("http", "https")
-                    exercises.add(Exercise(name, gifUrl))
+                    val bodyPart = responseBody.get(i).bodyPart
+                    val equipment = responseBody.get(i).equipment
+                    val target = responseBody.get(i).target
+                    exercises.add(Exercise(name, gifUrl, bodyPart, equipment, target))
 
                     // myRecycleView?.adapter?.notifyDataSetChanged()
                 }
                 myRecycleView?.adapter =
-                    this@FirstFragment.context?.let { ExerciseAdapter(it, exercises) }
+                    this@FirstFragment.context?.let { ExerciseAdapter(it, exercises, this@FirstFragment) }
+
             }
 
             override fun onFailure(call: Call<List<MyDataItem>?>, t: Throwable) {
-
+                Toast.makeText(context,t.toString(),Toast.LENGTH_SHORT).show()
             }
 
         })
@@ -138,5 +145,12 @@ class FirstFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onItemClick(position: Int) {
+        findNavController().navigate(R.id.action_firstFragment_to_exerciseDetails, Bundle().apply {
+            putString("name", exercises[position].name)
+            putString("imgUrl", exercises[position].imgUrl)
+        })
     }
 }
