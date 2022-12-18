@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.workoutapp_ryan.R
 import com.example.workoutapp_ryan.recycleview.model.Exercise
+import com.example.workoutapp_ryan.recycleview.model.Weight
 
 /* Sources:
     * https://developer.android.com/develop/ui/views/layout/recyclerview
@@ -22,7 +23,7 @@ import com.example.workoutapp_ryan.recycleview.model.Exercise
     * https://medium.com/huawei-developers/android-retrofit-recyclerview-searchview-usage-9e0be6e7ab08
 */
 
-class ExerciseAdapter(private val context: Context, private val exercises: List<Exercise>) :
+class ExerciseAdapter(private val context: Context, private val exercises: MutableList<Exercise>) :
     RecyclerView.Adapter<ExerciseAdapter.ViewHolder>() {
 
     private val TAG = "ExerciseAdapter"
@@ -31,7 +32,7 @@ class ExerciseAdapter(private val context: Context, private val exercises: List<
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         Log.i(TAG, "onCreateViewHolder")
         return ViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.recycler_row, parent, false)
+            LayoutInflater.from(context).inflate(R.layout.exercise_item, parent, false)
         )
     }
 
@@ -49,7 +50,7 @@ class ExerciseAdapter(private val context: Context, private val exercises: List<
         fun bind(exercise: Exercise) {
             itemView.findViewById<TextView>(R.id.exerciseName).text = exercise.name
             Glide.with(context).load(exercise.imgUrl).apply(RequestOptions().override(1200, 400))
-                .into(itemView.findViewById(R.id.exerciseImage))
+                .into(itemView.findViewById(R.id.weightstatus))
             val like = itemView.findViewById<ImageButton>(R.id.Like)
             like.setOnClickListener {
                 Log.d("Clicked", exercise.name)

@@ -24,7 +24,7 @@ Sources:
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/mRecyclerview"
+            android:id="@+id/RecycleviewExercise"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="55dp"
@@ -34,7 +34,7 @@ Sources:
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            tools:listitem="@layout/recycler_row">
+            tools:listitem="@layout/exercise_item">
 
         </androidx.recyclerview.widget.RecyclerView>
 

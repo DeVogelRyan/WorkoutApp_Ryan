@@ -1,12 +1,21 @@
 package com.example.workoutapp_ryan.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import androidx.transition.TransitionInflater
 import com.example.workoutapp_ryan.R
+import com.example.workoutapp_ryan.database.AppDatabase
+import com.example.workoutapp_ryan.recycleview.adapter.WeightAdapter
+import com.example.workoutapp_ryan.recycleview.model.Weight
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +31,9 @@ class SecondFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private var myRecycleView: RecyclerView? = null
+    private var weights: MutableList<Weight> = ArrayList()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +61,31 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        myRecycleView = requireView().findViewById<RecyclerView>(R.id.RecycleviewWeight)
+        myRecycleView?.layoutManager = LinearLayoutManager(this.context)
+        // myRecycleView?.adapter = null
+        initList()
+        Log.d("Users", weights.toString())
+
+    }
+
+    private fun initList(): List<Weight> {
+
+        val db = Room.databaseBuilder(
+            this.requireContext(),
+            AppDatabase::class.java, "users.db"
+        ).build()
+
+        lifecycleScope.launch {
+            db.dao.getWeights().forEach {
+                weights.add(Weight(it.createdAt, it.weight))
+                Log.d("Users", it.weight.toString())
+            }
+            myRecycleView?.adapter =
+                this@SecondFragment.context?.let { WeightAdapter(it, weights) }
+
+        }
+        return weights
     }
 
 

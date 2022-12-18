@@ -34,7 +34,6 @@ class FirstFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var isLoaded = false
     private var myRecycleView: RecyclerView? = null
 
     private var exercises: MutableList<Exercise> = ArrayList()
@@ -74,12 +73,10 @@ class FirstFragment : Fragment() {
          */
 
 
-        myRecycleView = requireView().findViewById<RecyclerView>(R.id.mRecyclerview)
+        myRecycleView = requireView().findViewById<RecyclerView>(R.id.RecycleviewExercise)
         myRecycleView?.layoutManager = LinearLayoutManager(this.context)
         // myRecycleView?.adapter = null
         createExercises()
-        isLoaded = true
-
     }
 
     private fun createExercises(): List<Exercise> {
