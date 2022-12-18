@@ -1,6 +1,7 @@
-package com.example.workoutapp_ryan.mydata
+package com.example.workoutapp_ryan.api
 
 import com.example.workoutapp_ryan.BuildConfig
+import com.example.workoutapp_ryan.api.model.MyDataItem
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers

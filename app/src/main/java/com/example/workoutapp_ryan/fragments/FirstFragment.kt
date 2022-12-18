@@ -2,18 +2,18 @@ package com.example.workoutapp_ryan.fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionInflater
-import com.example.workoutapp_ryan.mydata.APIInterface
-import com.example.workoutapp_ryan.mydata.MyDataItem
 import com.example.workoutapp_ryan.R
-import com.example.workoutapp_ryan.adapter.ExerciseAdapter
-import com.example.workoutapp_ryan.model.Exercise
+import com.example.workoutapp_ryan.api.APIInterface
+import com.example.workoutapp_ryan.api.model.MyDataItem
+import com.example.workoutapp_ryan.recycleview.adapter.ExerciseAdapter
+import com.example.workoutapp_ryan.recycleview.model.Exercise
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

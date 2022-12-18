@@ -1,6 +1,9 @@
 package com.example.workoutapp_ryan.database
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 
 /*
  Sources:

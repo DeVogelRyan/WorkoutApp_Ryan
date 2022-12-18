@@ -1,6 +1,6 @@
 package com.example.workoutapp_ryan.adapter
 
-import com.example.workoutapp_ryan.model.Exercise
+import com.example.workoutapp_ryan.recycleview.adapter.model.Exercise
 import org.junit.Assert.*
 
 import org.junit.Before

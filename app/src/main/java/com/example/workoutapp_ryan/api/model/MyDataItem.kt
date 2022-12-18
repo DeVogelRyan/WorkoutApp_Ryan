@@ -1,4 +1,4 @@
-package com.example.workoutapp_ryan.mydata
+package com.example.workoutapp_ryan.api.model
 
 /* Sources:
  * https://www.youtube.com/watch?v=5gFrXGbQsc8&t=342s

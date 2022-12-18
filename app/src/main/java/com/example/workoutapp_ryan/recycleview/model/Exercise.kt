@@ -1,4 +1,4 @@
-package com.example.workoutapp_ryan.model
+package com.example.workoutapp_ryan.recycleview.model
 
 /* Sources:
     * https://developer.android.com/develop/ui/views/layout/recyclerview

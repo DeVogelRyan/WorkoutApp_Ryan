@@ -1,10 +1,7 @@
 package com.example.workoutapp_ryan.database
 
-import androidx.room.AutoMigration
 import androidx.room.Database
-import androidx.room.RenameColumn
 import androidx.room.RoomDatabase
-import androidx.room.migration.AutoMigrationSpec
 
 /*
  Sources:

@@ -1,14 +1,20 @@
 package com.example.workoutapp_ryan.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
-import androidx.navigation.fragment.findNavController
+import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.room.Room
 import com.example.workoutapp_ryan.R
+import com.example.workoutapp_ryan.database.AppDatabase
+import com.example.workoutapp_ryan.database.Weight
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,10 +23,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [UserCreate.newInstance] factory method to
+ * Use the [DetailUserFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class UserCreate : Fragment() {
+class DetailUserFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -38,18 +44,29 @@ class UserCreate : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_user, container, false)
+
+
+        return inflater.inflate(R.layout.fragment_confirm_weight, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val btn = view.findViewById<Button>(R.id.CreateUser)
+        val weight = view.findViewById<TextView>(R.id.editWeight)
+        val args = this.arguments
+        val weightArgs = args?.get("weight")
+        weight.text = weightArgs.toString()
+        val db = Room.databaseBuilder(
+            this.requireContext(),
+            AppDatabase::class.java, "users.db"
+        ).build()
+        val btn = view.findViewById<Button>(R.id.saveToDb)
         btn.setOnClickListener{
-            val weight = view.findViewById<EditText>(R.id.weight)
-            findNavController().navigate(R.id.action_userCreate2_to_detailUserFragment, Bundle().apply {
-                putFloat("weight", weight.text.toString().toFloat())
-            })
+            lifecycleScope.launch {
+                db.dao.insertWeight(Weight(0, weight.text.toString().toFloat()))
+                Log.d("Users", db.dao.getWeights().toString())
+                Toast.makeText(context,"Successfully saved!",Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -60,12 +77,12 @@ class UserCreate : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment UserCreate.
+         * @return A new instance of fragment DetailUserFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            UserCreate().apply {
+            DetailUserFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

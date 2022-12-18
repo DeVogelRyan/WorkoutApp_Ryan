@@ -1,4 +1,4 @@
-package com.example.workoutapp_ryan.adapter
+package com.example.workoutapp_ryan.recycleview.adapter
 
 import android.content.Context
 import android.util.Log
@@ -11,8 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.workoutapp_ryan.R
-import com.example.workoutapp_ryan.model.Exercise
-
+import com.example.workoutapp_ryan.recycleview.model.Exercise
 
 /* Sources:
     * https://developer.android.com/develop/ui/views/layout/recyclerview
@@ -48,9 +47,9 @@ class ExerciseAdapter(private val context: Context, private val exercises: List<
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(exercise: Exercise) {
-            itemView.findViewById<TextView>(R.id.tvName).text = exercise.name
+            itemView.findViewById<TextView>(R.id.exerciseName).text = exercise.name
             Glide.with(context).load(exercise.imgUrl).apply(RequestOptions().override(1200, 400))
-                .into(itemView.findViewById(R.id.tvImage))
+                .into(itemView.findViewById(R.id.exerciseImage))
             val like = itemView.findViewById<ImageButton>(R.id.Like)
             like.setOnClickListener {
                 Log.d("Clicked", exercise.name)
