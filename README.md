@@ -30,10 +30,10 @@
 * Use of JUnit framework for writing tests for your application (minimum 1)
 * Support for at least English and another language of your choice. Additional languages may be provided but do not count for extra points.
 * Persistence of data, using SQLite (Room) or an external ORM
+* Minimum support of hdpi, xhdpi, xxhdpi and xxxhdpi screens
+* At least 2 activities or fragments between which information is exchanged (by means of Intents, ViewModel, Navigation graph actions, ...)
 
 #### Extras:
 * Use of transitions
+* Dark mode
 
-### ToDO:
-* Minimum support of hdpi, xhdpi, xxhdpi and xxxhdpi screens
-* At least 2 activities or fragments between which information is exchanged (by means of Intents, ViewModel, Navigation graph actions, ...)
