@@ -78,7 +78,6 @@ class GetHistory : Fragment() {
         lifecycleScope.launch {
             db.dao.getWeights().forEach {
                 weights.add(Weight(it.createdAt, it.weight))
-                Log.d("Users", it.weight.toString())
             }
             myRecycleView?.adapter =
                 this@GetHistory.context?.let { WeightAdapter(it, weights) }

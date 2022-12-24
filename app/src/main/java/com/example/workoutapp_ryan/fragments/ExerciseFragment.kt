@@ -88,17 +88,14 @@ class ExerciseFragment : Fragment(), ExerciseAdapter.OnItemClickListener {
             ExerciseDB::class.java, "exercise.db"
         ).build()
 
-        if (exercises.isEmpty()) {
-            addToDB()
+        lifecycleScope.launch{
+            if (db.dao.getExercises().isEmpty()) {
+                addToDB()
+                getExercises()
+            }
             getExercises()
         }
-        getExercises()
-        myRecycleView?.adapter =
-            ExerciseAdapter(
-                this.requireContext(),
-                exercises,
-                this
-            )
+
 
     }
 
@@ -148,7 +145,7 @@ class ExerciseFragment : Fragment(), ExerciseAdapter.OnItemClickListener {
             ) {
                 val responseBody = response.body()!!
                 lifecycleScope.launch {
-                    for (i in 0..40) {
+                    for (i in 0..30) {
                         Log.d("JSON", responseBody[i].name)
                         val name = responseBody[i].name
                         val gifUrl = responseBody[i].gifUrl.replace("http", "https")
