@@ -56,6 +56,10 @@ class CreateWeight : Fragment() {
                     })
             }
             else {
+                /*
+                Source:
+                * https://www.javatpoint.com/kotlin-android-toast
+                */
                 Toast.makeText(context, getString(R.string.error), Toast.LENGTH_SHORT).show()
             }
         }

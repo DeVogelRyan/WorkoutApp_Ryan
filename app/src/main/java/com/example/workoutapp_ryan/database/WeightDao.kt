@@ -16,12 +16,11 @@ import androidx.room.Query
 interface WeightDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertWeight(weight: Weight)
+    suspend fun insertWeight(weight: WeightModel)
 
     @Query("SELECT * FROM weight")
-    suspend fun getWeights(): List<Weight>
+    suspend fun getWeights(): List<WeightModel>
 
     @Query("DELETE FROM weight")
     suspend fun deleteAll()
-
 }

@@ -13,11 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import androidx.transition.TransitionInflater
 import com.example.workoutapp_ryan.R
-import com.example.workoutapp_ryan.database.AppDatabase
+import com.example.workoutapp_ryan.database.WeightDB
 import com.example.workoutapp_ryan.recycleview.adapter.WeightAdapter
 import com.example.workoutapp_ryan.recycleview.model.Weight
 import kotlinx.coroutines.launch
-import org.w3c.dom.Text
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -71,7 +70,7 @@ class GetHistory : Fragment() {
 
         val db = Room.databaseBuilder(
             this.requireContext(),
-            AppDatabase::class.java, "users.db"
+            WeightDB::class.java, "weights.db"
         ).build()
 
         val historyEmpty = requireView().findViewById<TextView>(R.id.History_Is_empty)
@@ -87,7 +86,6 @@ class GetHistory : Fragment() {
             if(db.dao.getWeights().isEmpty()){
                 historyEmpty.text = getString(R.string.history_empty)
             }
-
         }
         return weights
     }

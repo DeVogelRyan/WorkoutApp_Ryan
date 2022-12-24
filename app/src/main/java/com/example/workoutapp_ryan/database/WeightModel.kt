@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity()
-data class Weight (
+@Entity(tableName = "weight")
+data class WeightModel (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(defaultValue = "0")
     val weightID: Int,

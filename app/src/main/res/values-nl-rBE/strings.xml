@@ -12,17 +12,16 @@ Sources:
 
     <string name="history_empty">Er is nog geen gewichtsgeschiedenis toegevoegd!</string>
 
-
     <string name="weightHint">gewicht</string>
     <string name="nextbutton">Volgende</string>
-
 
     <string name="confirm_dialog">Weet je zeker dat dit klopt?</string>
     <string name="succes">Succesvol opgeslagen!</string>
     <string name="error">Je moet een nummer invullen!</string>
     <string name="confirmbutton">Bevestig</string>
 
-    <string name="deleteDB">Database succesvol verwijderd!</string>
+    <string name="deleteDBbtn">Database verwijderen</string>
+    <string name="deleteDBPopup">Successfully delete database!</string>
 
 
 </resources>

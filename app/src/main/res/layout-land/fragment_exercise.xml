@@ -8,6 +8,7 @@ Sources:
     * https://www.youtube.com/watch?v=4o6QwVe_2Yg
     * https://www.youtube.com/watch?v=rBQi_7L-Uc8
     * https://medium.com/huawei-developers/android-retrofit-recyclerview-searchview-usage-9e0be6e7ab08
+    * https://www.geeksforgeeks.org/how-to-create-landscape-layout-in-android-studio/
 -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"

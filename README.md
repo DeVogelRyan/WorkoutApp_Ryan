@@ -17,6 +17,12 @@
 * https://developer.android.com/jetpack/androidx/releases/room
 * https://developer.android.com/reference/android/arch/persistence/room/PrimaryKey
 * https://github.com/philipplackner/AndroidRoomMigration
+* https://www.javatpoint.com/kotlin-android-toast
+* https://www.youtube.com/watch?v=72qURZPIUIA
+* https://www.youtube.com/watch?v=wKFJsrdiGS8
+* https://developer.android.com/develop/ui/views/theming/darktheme
+* https://developer.android.com/training/multiscreen/screendensities
+* https://www.geeksforgeeks.org/how-to-create-landscape-layout-in-android-studio/
 
 ## Requirements
 

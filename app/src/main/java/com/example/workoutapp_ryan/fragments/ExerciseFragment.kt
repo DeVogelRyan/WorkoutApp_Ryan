@@ -7,15 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import androidx.transition.TransitionInflater
 import com.example.workoutapp_ryan.R
 import com.example.workoutapp_ryan.api.APIInterface
 import com.example.workoutapp_ryan.api.model.MyDataItem
+import com.example.workoutapp_ryan.database.ExerciseDB
+import com.example.workoutapp_ryan.database.ExerciseModel
 import com.example.workoutapp_ryan.recycleview.adapter.ExerciseAdapter
 import com.example.workoutapp_ryan.recycleview.model.Exercise
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -77,15 +82,58 @@ class ExerciseFragment : Fragment(), ExerciseAdapter.OnItemClickListener {
 
         myRecycleView = requireView().findViewById<RecyclerView>(R.id.RecycleviewExercise)
         myRecycleView?.layoutManager = LinearLayoutManager(this.context)
-        // myRecycleView?.adapter = null
-        createExercises()
+
+        val db = Room.databaseBuilder(
+            this.requireContext(),
+            ExerciseDB::class.java, "exercise.db"
+        ).build()
+
+        if (exercises.isEmpty()) {
+            addToDB()
+            getExercises()
+        }
+        getExercises()
+        myRecycleView?.adapter =
+            ExerciseAdapter(
+                this.requireContext(),
+                exercises,
+                this
+            )
+
     }
 
-    private fun createExercises(): List<Exercise> {
+    private fun getExercises() {
+        val db = Room.databaseBuilder(
+            this.requireContext(),
+            ExerciseDB::class.java, "exercise.db"
+        ).build()
+        exercises.clear()
+        lifecycleScope.launch {
+            db.dao.getExercises().forEach {
+                exercises.add(Exercise(it.name, it.imgUrl, it.bodyPart, it.equipment, it.target))
+                Log.d("Users", it.toString())
+            }
+            myRecycleView?.adapter =
+                ExerciseAdapter(
+                    this@ExerciseFragment.requireContext(),
+                    exercises,
+                    this@ExerciseFragment
+                )
+        }
+    }
+
+    private fun addToDB() {
         /* Sources:
          * https://www.youtube.com/watch?v=5gFrXGbQsc8&t=342s
          * https://square.github.io/retrofit/
          */
+
+        Log.d("Users", "xDDD")
+        val db = Room.databaseBuilder(
+            this.requireContext(),
+            ExerciseDB::class.java, "exercise.db"
+        ).build()
+
         val retrofitbuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl("https://exercisedb.p.rapidapi.com/")
@@ -93,37 +141,38 @@ class ExerciseFragment : Fragment(), ExerciseAdapter.OnItemClickListener {
             .create(APIInterface::class.java)
 
         val retrofitData = retrofitbuilder.getData()
-
         retrofitData.enqueue(object : Callback<List<MyDataItem>?> {
             override fun onResponse(
                 call: Call<List<MyDataItem>?>,
                 response: Response<List<MyDataItem>?>
             ) {
                 val responseBody = response.body()!!
-                exercises.clear()
-
-                for (i in 0..20) {
-                    Log.d("JSON", responseBody.get(i).name)
-                    val name = responseBody.get(i).name
-                    val gifUrl = responseBody.get(i).gifUrl.replace("http", "https")
-                    val bodyPart = responseBody.get(i).bodyPart
-                    val equipment = responseBody.get(i).equipment
-                    val target = responseBody.get(i).target
-                    exercises.add(Exercise(name, gifUrl, bodyPart, equipment, target))
-
-                    // myRecycleView?.adapter?.notifyDataSetChanged()
+                lifecycleScope.launch {
+                    for (i in 0..40) {
+                        Log.d("JSON", responseBody[i].name)
+                        val name = responseBody[i].name
+                        val gifUrl = responseBody[i].gifUrl.replace("http", "https")
+                        val bodyPart = responseBody[i].bodyPart
+                        val equipment = responseBody[i].equipment
+                        val target = responseBody[i].target
+                        db.dao.insertExercise(
+                            ExerciseModel(
+                                0,
+                                name,
+                                gifUrl,
+                                bodyPart,
+                                equipment,
+                                target
+                            )
+                        )
+                    }
                 }
-                myRecycleView?.adapter =
-                    this@ExerciseFragment.context?.let { ExerciseAdapter(it, exercises, this@ExerciseFragment) }
-
             }
 
             override fun onFailure(call: Call<List<MyDataItem>?>, t: Throwable) {
-                Toast.makeText(context,t.toString(),Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, t.toString(), Toast.LENGTH_SHORT).show()
             }
-
         })
-        return exercises
     }
 
     companion object {
@@ -146,13 +195,20 @@ class ExerciseFragment : Fragment(), ExerciseAdapter.OnItemClickListener {
             }
     }
 
+    /*
+     Source:
+     * https://www.youtube.com/watch?v=wKFJsrdiGS8
+     */
     override fun onItemClick(position: Int) {
-        findNavController().navigate(R.id.action_exerciseFragment_to_exerciseDetails, Bundle().apply {
-            putString("name", exercises[position].name)
-            putString("imgUrl", exercises[position].imgUrl)
-            putString("bodyPart", exercises[position].bodyPart)
-            putString("equipment", exercises[position].equipment)
-            putString("target", exercises[position].target)
-        })
+        findNavController().navigate(
+            R.id.action_exerciseFragment_to_exerciseDetails,
+            Bundle().apply {
+                putString("name", exercises[position].name)
+                putString("imgUrl", exercises[position].imgUrl)
+                putString("bodyPart", exercises[position].bodyPart)
+                putString("equipment", exercises[position].equipment)
+                putString("target", exercises[position].target)
+            })
     }
+
 }

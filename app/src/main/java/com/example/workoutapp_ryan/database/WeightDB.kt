@@ -11,9 +11,8 @@ import androidx.room.RoomDatabase
  */
 
 @Database(
-    entities = [Weight::class], version = 1
+    entities = [WeightModel::class], version = 1
 )
-abstract class AppDatabase : RoomDatabase() {
+abstract class WeightDB : RoomDatabase() {
     abstract val dao: WeightDao
-
 }

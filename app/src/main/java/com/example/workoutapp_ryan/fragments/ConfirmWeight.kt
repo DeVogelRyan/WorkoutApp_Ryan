@@ -10,11 +10,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.room.Room
 import com.example.workoutapp_ryan.R
-import com.example.workoutapp_ryan.database.AppDatabase
-import com.example.workoutapp_ryan.database.Weight
+import com.example.workoutapp_ryan.database.WeightDB
+import com.example.workoutapp_ryan.database.WeightModel
 import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
@@ -59,19 +58,23 @@ class ConfirmWeight : Fragment() {
         weight.text = weightArgs.toString()
         val db = Room.databaseBuilder(
             this.requireContext(),
-            AppDatabase::class.java, "users.db"
+            WeightDB::class.java, "weights.db"
         ).build()
         val btn = view.findViewById<Button>(R.id.saveToDb)
         btn.setOnClickListener {
             if (!isEmpty()) {
                 lifecycleScope.launch {
-                    db.dao.insertWeight(Weight(0, weight.text.toString().toFloat()))
+                    db.dao.insertWeight(WeightModel(0, weight.text.toString().toFloat()))
                     Log.d("Users", db.dao.getWeights().toString())
                     Toast.makeText(context, getString(R.string.succes), Toast.LENGTH_SHORT).show()
                     weight.text = ""
                 }
             }
             else {
+                /*
+                 Source:
+                 * https://www.javatpoint.com/kotlin-android-toast
+                 */
                 Toast.makeText(context, getString(R.string.error), Toast.LENGTH_SHORT).show()
             }
         }
