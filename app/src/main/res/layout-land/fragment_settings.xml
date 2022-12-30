@@ -18,9 +18,9 @@ Source:
 
         <Button
             android:id="@+id/Delete"
-            android:layout_width="218dp"
-            android:layout_height="65dp"
-            android:text="Delete Database"
+            android:layout_width="334dp"
+            android:layout_height="91dp"
+            android:text="@string/deleteDBbtn"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

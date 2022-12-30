@@ -21,7 +21,7 @@ Sources:
     <string name="error">You have to fill in a number!</string>
     <string name="confirmbutton">Confirm</string>
 
-    <string name="deleteDBbtn">Delete Database</string>
+    <string name="deleteDBbtn">Delete Weight History</string>
     <string name="deleteDBPopup">Successfully delete database!</string>
 
 

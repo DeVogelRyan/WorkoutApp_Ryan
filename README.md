@@ -1,5 +1,9 @@
 # This is a project for school.
 
+## This app is available on the playstore:
+
+[Download it here](https://play.google.com/store/apps/details?id=workoutapp.ryan)
+
 
 ## Sources:
 * https://www.youtube.com/watch?v=-2ckvIzs0nU

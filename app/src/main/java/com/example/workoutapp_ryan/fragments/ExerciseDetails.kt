@@ -61,8 +61,8 @@ class ExerciseDetails : Fragment() {
             .apply(RequestOptions().override(800, 800))
             .into(imgUrlView)
         bodyPart.text = "bodypart: ${bodyPartArgs.toString()}"
-        equipment.text = "bodypart: ${equipmentArgs.toString()}"
-        target.text = "bodypart: ${targetArgs.toString()}"
+        equipment.text = "equipment: ${equipmentArgs.toString()}"
+        target.text = "target: ${targetArgs.toString()}"
 
     }
 

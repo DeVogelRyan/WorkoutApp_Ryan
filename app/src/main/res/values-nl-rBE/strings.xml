@@ -20,7 +20,7 @@ Sources:
     <string name="error">Je moet een nummer invullen!</string>
     <string name="confirmbutton">Bevestig</string>
 
-    <string name="deleteDBbtn">Database verwijderen</string>
+    <string name="deleteDBbtn">Gewichtsgeschiedenis Verwijderen</string>
     <string name="deleteDBPopup">Successfully delete database!</string>
 
 
