@@ -124,11 +124,7 @@ class ExerciseFragment : Fragment(), ExerciseAdapter.OnItemClickListener {
          */
 
         Log.d("Users", "xDDD")
-        val db = Room.databaseBuilder(
-            this.requireContext(),
-            ExerciseDB::class.java, "exercise.db"
-        ).build()
-
+        var db: ExerciseDao = ExerciseDB.getInstance(this.requireContext()).dao
         val retrofitbuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl("https://exercisedb.p.rapidapi.com/")
@@ -150,7 +146,7 @@ class ExerciseFragment : Fragment(), ExerciseAdapter.OnItemClickListener {
                         val bodyPart = responseBody[i].bodyPart
                         val equipment = responseBody[i].equipment
                         val target = responseBody[i].target
-                        db.dao.insertExercise(
+                        db.insertExercise(
                             ExerciseModel(
                                 0,
                                 name,
