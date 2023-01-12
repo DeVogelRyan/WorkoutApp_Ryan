@@ -17,6 +17,7 @@ import com.example.workoutapp_ryan.R
 import com.example.workoutapp_ryan.api.APIInterface
 import com.example.workoutapp_ryan.api.model.MyDataItem
 import com.example.workoutapp_ryan.database.ExerciseDB
+import com.example.workoutapp_ryan.database.ExerciseDao
 import com.example.workoutapp_ryan.database.ExerciseModel
 import com.example.workoutapp_ryan.recycleview.adapter.ExerciseAdapter
 import com.example.workoutapp_ryan.recycleview.model.Exercise
@@ -100,13 +101,10 @@ class ExerciseFragment : Fragment(), ExerciseAdapter.OnItemClickListener {
     }
 
     private fun getExercises() {
-        val db = Room.databaseBuilder(
-            this.requireContext(),
-            ExerciseDB::class.java, "exercise.db"
-        ).build()
+        var db: ExerciseDao = ExerciseDB.getInstance(this.requireContext()).dao
         exercises.clear()
         lifecycleScope.launch {
-            db.dao.getExercises().forEach {
+            db.getExercises().forEach {
                 exercises.add(Exercise(it.name, it.imgUrl, it.bodyPart, it.equipment, it.target))
                 Log.d("Users", it.toString())
             }

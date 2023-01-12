@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
 import com.example.workoutapp_ryan.R
 import com.example.workoutapp_ryan.database.WeightDB
+import com.example.workoutapp_ryan.database.WeightDao
 import com.example.workoutapp_ryan.database.WeightModel
 import kotlinx.coroutines.launch
 
@@ -44,8 +45,6 @@ class ConfirmWeight : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
-
         return inflater.inflate(R.layout.fragment_confirm_weight, container, false)
     }
 
@@ -56,16 +55,13 @@ class ConfirmWeight : Fragment() {
         val args = this.arguments
         val weightArgs = args?.get("weight")
         weight.text = weightArgs.toString()
-        val db = Room.databaseBuilder(
-            this.requireContext(),
-            WeightDB::class.java, "weights.db"
-        ).build()
+        var db: WeightDao = WeightDB.getInstance(this.requireContext()).dao
         val btn = view.findViewById<Button>(R.id.saveToDb)
         btn.setOnClickListener {
             if (!isEmpty()) {
                 lifecycleScope.launch {
-                    db.dao.insertWeight(WeightModel(0, weight.text.toString().toFloat()))
-                    Log.d("Users", db.dao.getWeights().toString())
+                    db.insertWeight(WeightModel(0, weight.text.toString().toFloat()))
+                    Log.d("Users", db.getWeights().toString())
                     Toast.makeText(context, getString(R.string.succes), Toast.LENGTH_SHORT).show()
                     weight.text = ""
                 }

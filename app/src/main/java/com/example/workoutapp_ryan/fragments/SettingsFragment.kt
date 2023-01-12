@@ -10,7 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
 import com.example.workoutapp_ryan.R
+import com.example.workoutapp_ryan.database.ExerciseDB
+import com.example.workoutapp_ryan.database.ExerciseDao
 import com.example.workoutapp_ryan.database.WeightDB
+import com.example.workoutapp_ryan.database.WeightDao
 import kotlinx.coroutines.launch
 
 
@@ -49,13 +52,10 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val deleteBtn = view.findViewById<Button>(R.id.Delete)
-        val db = Room.databaseBuilder(
-            this.requireContext(),
-            WeightDB::class.java, "weights.db"
-        ).build()
+        var db: WeightDao = WeightDB.getInstance(this.requireContext()).dao
         deleteBtn.setOnClickListener {
             lifecycleScope.launch {
-                db.dao.deleteAll()
+                db.deleteAll()
                 /*
                 Source:
                 * https://www.javatpoint.com/kotlin-android-toast

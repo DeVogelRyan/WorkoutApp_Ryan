@@ -1,6 +1,8 @@
 package com.example.workoutapp_ryan.database
 
+import android.content.Context
 import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
 
 /*
@@ -15,4 +17,18 @@ import androidx.room.RoomDatabase
 )
 abstract class ExerciseDB : RoomDatabase() {
     abstract val dao: ExerciseDao
+
+    companion object {
+        private var INSTANCE: ExerciseDB? = null
+        fun getInstance(context: Context): ExerciseDB {
+            if (INSTANCE == null) {
+                synchronized(this) {
+                    INSTANCE =
+                        Room.databaseBuilder(context, ExerciseDB::class.java, "exercise.db")
+                            .build()
+                }
+            }
+            return INSTANCE!!
+        }
+    }
 }
