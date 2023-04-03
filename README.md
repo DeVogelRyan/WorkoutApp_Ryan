@@ -24,6 +24,11 @@
 * Dark mode
 * Published it on the google playstore
 
+## Demo:
+
+https://user-images.githubusercontent.com/80109984/229607182-a1cab378-81e2-4c6e-9660-fa66df53145e.mp4
+
+
 ## Sources:
 * https://www.youtube.com/watch?v=-2ckvIzs0nU
 * https://stackoverflow.com/questions/50502269/illegalstateexception-link-does-not-have-a-navcontroller-set
