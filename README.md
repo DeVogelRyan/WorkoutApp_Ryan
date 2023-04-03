@@ -51,4 +51,5 @@ https://user-images.githubusercontent.com/80109984/229607182-a1cab378-81e2-4c6e-
 * https://developer.android.com/develop/ui/views/theming/darktheme
 * https://developer.android.com/training/multiscreen/screendensities
 * https://www.geeksforgeeks.org/how-to-create-landscape-layout-in-android-studio/
+* https://rapidapi.com/justin-WFnsXH_t6/api/exercisedb
 
